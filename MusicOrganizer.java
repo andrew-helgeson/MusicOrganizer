@@ -12,6 +12,8 @@ public class MusicOrganizer
 {
     // An ArrayList for storing music tracks.
     private ArrayList<Track> tracks;
+    
+    private ArrayList<Track> randomTracks;
     // A player for the music tracks.
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
@@ -25,6 +27,7 @@ public class MusicOrganizer
     public MusicOrganizer()
     {
         tracks = new ArrayList<>();
+        randomTracks = new ArrayList<>();
         player = new MusicPlayer();
         reader = new TrackReader();
         randomNumber = new Random();
@@ -100,10 +103,17 @@ public class MusicOrganizer
     public void playRandomNonRepeat()
     {
         
-        int randomTrack = randomNumber.nextInt(4);
-        
-        Track track = tracks.get(randomTrack);
-        player.startPlaying(track.getFilename());
+        // this method still needs work. I couldn't find out how to properly
+        //play the songs in random order.
+        if (player != null){
+        for(Track track : tracks) {
+            int randomTrack = randomNumber.nextInt(4);
+            track = tracks.get(randomTrack);
+            System.out.println(track.getDetails());
+            player.startPlaying(tracks.get(randomTrack).getFilename());
+        }
+        System.out.println();
+    }
     }
     
     /**
